@@ -5,7 +5,7 @@ export PATH=/busybox
 #WL=${2:-"$BINDIR/diceware_wordlist_cz.txt"}
 WL=${2:-"$BINDIR/diceware.wordlist.asc"}
 
-. $PWD/ozo.inc
+. $BINDIR/ozo.inc
 
 test "$1" = "-wl" && {
   WL=$2

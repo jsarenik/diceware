@@ -17,12 +17,14 @@ xd=1101
 xe=1110
 xf=1111
 
+cutb=1
+test "$1" = "-l" && { cutb=2; shift; }
 test "$1" = "" && read -r inn || inn=$1
 lower=$(echo $inn | tr '[A-F]' '[a-f]')
 upper=$(echo $inn | tr '[a-f]' '[A-F]')
 entropy=$(echo $lower | eval echo $(sed 's/[0-9a-f]/${x&}/g'))
-checksum=$(printf $upper | xxd -r -p | sha256sum | cut -b1)
-bincs=$(eval echo '''${x'$checksum'}''')
+checksum=$(printf $upper | xxd -r -p | sha256sum | cut -b-${cutb})
+bincs=$(echo $checksum | eval echo $(sed 's/[0-9a-f]/${x&}/g'))
 echo "$checksum (hex) = $bincs (bin)" >&2
 #echo $bincs
 full="${entropy}${bincs}"

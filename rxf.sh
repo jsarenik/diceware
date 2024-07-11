@@ -19,6 +19,8 @@ xd=1101
 xe=1110
 xf=1111
 
+foldw=4
+test "$1" = "-l" && { foldw=8; shift; }
 test "$1" = "" && read -r mnemonic || mnemonic=$*
 echo $mnemonic >&2
 for w in $mnemonic; do line=$(echo "obase=2; ibase=16; $(printf '%04X\n' $(grep -w $w misc/bip39-numbers.txt | cut -f1))" | bc);
@@ -26,7 +28,7 @@ for w in $mnemonic; do line=$(echo "obase=2; ibase=16; $(printf '%04X\n' $(grep 
   missing=$((11-$len))
   for i in $(seq $missing); do printf 0; done
   echo $line
-done | paste -d" " -s | tr -d " " | fold -w 4 | sed '$d' | tr -d '\n'
+done | paste -d" " -s | tr -d " " | fold -w $foldw | sed '$d' | tr -d '\n'
 echo
 #for w in $mnemonic; do printf '%X' $(grep -w $w misc/bip39-numbers.txt | cut -f1); done
 exit

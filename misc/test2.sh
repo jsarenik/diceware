@@ -10,5 +10,5 @@ do
 done > /tmp/test$$
 EOF
 
-sort /tmp/test$$ | uniq -c
+sort /tmp/test$$ | uniq -c | sort -nk1
 rm -v /tmp/test$$

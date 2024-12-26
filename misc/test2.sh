@@ -5,8 +5,8 @@ while
   true
 do
   #echo "ibase=16; obase=10; \$(dd if=/dev/urandom bs=1 count=1 2>/dev/null | xxd -p | tr '[a-f]' '[A-F]')%6+1;" | bc
-  #dd if=/dev/random bs=1 count=1 2>/dev/null | xxd -p
-  busybox dd if=/dev/random bs=1 count=1 2>/dev/null | busybox xxd -p | busybox cut -b1
+  #dd if=/dev/urandom bs=1 count=1 2>/dev/null | xxd -p
+  busybox dd if=/dev/urandom bs=1 count=1 2>/dev/null | busybox xxd -p | busybox cut -b1
 done > /tmp/test$$
 EOF
 
